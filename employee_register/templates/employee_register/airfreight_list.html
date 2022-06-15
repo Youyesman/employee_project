@@ -1,0 +1,77 @@
+{% extends "employee_register/base.html" %}
+
+
+{% block content %}
+{% if user.is_authenticated %}
+<table class="table table-borderless">
+    <thead class="border-bottom font-weight-bold">
+        <tr>
+            <td>consol</td>            
+            <td>pic</td>
+            <td>chk_date</td>
+            <td>origin</td>
+            <td>dest</td>
+            <td>carrier</td>
+            <td>min</td>
+            <td>normal</td>
+            <td>45kg</td>
+            <td>100kg</td>
+            <td>300kg</td>
+            <td>500kg</td>
+            <td>1000kg</td>
+            <td>fsc</td>
+            <td>iss</td>
+            <td>iss</td>
+            <td>tspoint</td>
+            <td>schedule</td>
+            <td>air_remark</td>
+            <td>
+                <a href="{% url 'airfreight_insert' %}" >
+                    <button type="button" class="btn btn-success">추가</button>
+                </a>
+            </td>
+        </tr>
+    </thead>
+    <tbody>
+        {% for airfreight in airfreight_list %}
+            <tr>
+                <td>{{airfreight.air_consol}}</td>                
+                <td>{{airfreight.air_pic}}</td>
+                <td>{{airfreight.air_chk_date}}</td>
+                <td>{{airfreight.air_origin}}</td>
+                <td>{{airfreight.air_dest}}</td>
+                <td>{{airfreight.air_carrier}}</td>
+                <td>{{airfreight.air_min}}</td>
+                <td>{{airfreight.air_normal}}</td>                
+                <td>{{airfreight.air_45kg}} </td>
+                <td>{{airfreight.air_100kg}} </td> 
+                <td>{{airfreight.air_300kg}} </td>
+                <td>{{airfreight.air_500kg}} </td>  
+                <td>{{airfreight.air_1000kg}} </td>
+                <td>{{airfreight.air_fsc}} </td>
+                <td>{{airfreight.air_iss}} </td>
+                <td>{{airfreight.air_tspoint}} </td>
+                <td>{{airfreight.air_remark}} </td>
+
+                <td>
+                    <a href="{% url 'airfreight_update' airfreight.id %}">
+                        <button type="button" class="btn btn-warning">수정</button>
+                    </a>
+                    
+                    <form action="{% url 'airfreight_delete' airfreight.id %}" method="post" class="d-inline">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-danger">삭제</button>
+                    </form>
+                </td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{%else%}
+
+<h1>로그인 해주세요</h1>
+{%endif%}
+
+
+{% endblock content %}
