@@ -26,6 +26,7 @@ class EmployeeForm(forms.ModelForm) :
         }
         widgets = {
         'chk_date': forms.DateInput(format=('%m/%d/%Y'), attrs={'class':'form-control', 'placeholder':'Select a date', 'type':'date'}),
+        'effective': forms.DateInput(format=('%m/%d/%Y'), attrs={'class':'form-control', 'placeholder':'Select a date', 'type':'date'}),
         }
         
         

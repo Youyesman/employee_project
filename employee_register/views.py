@@ -1,15 +1,16 @@
 from django.shortcuts import render, redirect
 from .forms import AirfreightForm, EmployeeForm
 from .models import Airfreight, Employee
+from django.db.models import Q
 
 
 ###########################################################################################################
-def employee_list(request):
+def FCL_list(request):
     context = {'employee_list': Employee.objects.all()}
-    return render(request, "employee_register/employee_list.html", context)
+    return render(request, "employee_register/FCL_list.html", context)
 
 
-def employee_form(request, id=0):
+def FCL_form(request, id=0):
     
     if request.method == "GET":
         if id == 0:
@@ -17,7 +18,7 @@ def employee_form(request, id=0):
         else:
             employee = Employee.objects.get(pk=id)
             form = EmployeeForm(instance= employee)
-        return render(request, "employee_register/employee_form.html", {'form': form})
+        return render(request, "employee_register/FCL_form.html", {'form': form})
     else:
         if id == 0:
             form = EmployeeForm(request.POST)
@@ -26,19 +27,19 @@ def employee_form(request, id=0):
             form = EmployeeForm(request.POST,instance= employee)
         if form.is_valid():
             form.save()
-        return redirect('/main/oceanfreight/list')
+        return redirect('/main/FCL_list.html')
 
 
-def employee_delete(request,id):
+def FCL_delete(request,id):
     employee = Employee.objects.get(pk=id)
     employee.delete()
-    return redirect('/main/oceanfreight/list')
+    return redirect('/main/FCL_list.html')
 
 ###########################################################################################################
 
 def airfreight_list(request):
     context = {'airfreight_list': Airfreight.objects.all()}
-    return render(request, "employee_register/airfreight_list.html", context)
+    return render(request, "employee_register/AIR_list.html", context)
 
 def airfreight_form(request, id=0):
     
@@ -48,7 +49,7 @@ def airfreight_form(request, id=0):
         else:
             airfreight = Airfreight.objects.get(pk=id)
             form = AirfreightForm(instance= airfreight)
-        return render(request, "employee_register/airfreight_form.html", {'form': form})
+        return render(request, "employee_register/AIR_form.html", {'form': form})
     else:
         if id == 0:
             form = AirfreightForm(request.POST)
@@ -68,22 +69,57 @@ def airfreight_delete(request,id):
 
 ###########################################################################################################
 
+def error(request):
+    return render(request, 'employee_register/404.html')
 
+def blank(request):
+    return render(request, 'employee_register/blank.html')
 
-def about(request):
-    return render(request, 'employee_register/about.html')
+def buttons(request):
+    return render(request, 'employee_register/buttons.html')
 
-def contact(request):
-    return render(request, 'employee_register/contact.html')
+def cards(request):
+    return render(request, 'employee_register/cards.html')
 
-def portfolio(request):
-    return render(request, 'employee_register/portfolio.html')
+def charts(request):
+    return render(request, 'employee_register/charts.html')
 
-def portfolio_details(request):
-    return render(request, 'employee_register/portfolio-details.html')
+def forgotpassword(request):
+    return render(request, 'employee_register/forgot-password.html')
 
-def resume(request):
-    return render(request, 'employee_register/resume.html')
+def index(request):
+    return render(request, 'employee_register/index.html')
 
-def services(request):
-    return render(request, 'employee_register/services.html')
+def login(request):
+    return render(request, 'employee_register/login.html')
+
+def register(request):
+    return render(request, 'employee_register/register.html')
+
+def table(request):
+    return render(request, 'employee_register/table.html')
+
+def utilitiesanimation(request):
+    return render(request, 'employee_register/utilities-animation.html')
+
+def utilitiesborder(request):
+    return render(request, 'employee_register/utilities-border.html')
+
+def utilitiescolor(request):
+    return render(request, 'employee_register/utilities-color.html')
+
+def utilitiesother(request):
+    return render(request, 'employee_register/utilities-other.html')
+
+def search(request):
+    qs = Employee.objects.all()
+    q = request.GET.get('q', '') # q가 없으면 빈 문자열 리턴
+
+    if q:
+        qs = qs.filter(dest__icontains=q)|qs.filter(origin__icontains=q)|qs.filter(carrier__icontains=q)|qs.filter(position__icontains=q)
+
+    return render(request, 'employee_register/search.html', {
+        'employee_list': qs,
+        'q': q,
+ 
+    })
