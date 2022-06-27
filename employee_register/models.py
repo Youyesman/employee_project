@@ -42,5 +42,15 @@ class Airfreight(models.Model):
     air_tspoint = models.CharField(max_length=100)
     air_skdl = models.CharField(max_length=100)
     air_remark = models.CharField(max_length=100)
-    
+
+class LCL(models.Model):
+    LCL_chk_date = models.CharField(max_length=100)
+    LCL_pic_code = models.CharField(max_length=100)
+    LCL_origin = models.CharField(max_length=100)
+    LCL_dest = models.CharField(max_length=100)
+    LCL_ofc = models.CharField(max_length=100)
+    LCL_consol = models.CharField(max_length=100)
+    LCL_ttime = models.CharField(max_length=100)
+    LCL_effective = models.CharField(max_length=100)
+    LCL_remark = models.CharField(max_length=100)
     

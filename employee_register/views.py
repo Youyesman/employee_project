@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
-from .forms import AirfreightForm, EmployeeForm
-from .models import Airfreight, Employee
+from .forms import AirfreightForm, EmployeeForm, LCLForm
+from .models import LCL, Airfreight, Employee
 from django.db.models import Q
 
 
@@ -37,11 +37,11 @@ def FCL_delete(request,id):
 
 ###########################################################################################################
 
-def airfreight_list(request):
+def AIR_list(request):
     context = {'airfreight_list': Airfreight.objects.all()}
     return render(request, "employee_register/AIR_list.html", context)
 
-def airfreight_form(request, id=0):
+def AIR_form(request, id=0):
     
     if request.method == "GET":
         if id == 0:
@@ -58,17 +58,45 @@ def airfreight_form(request, id=0):
             form = AirfreightForm(request.POST,instance= airfreight)
         if form.is_valid():
             form.save()
-        return redirect('/main/airfreight/list')
+        return redirect('/main/AIR_list.html')
 
 
-def airfreight_delete(request,id):
+def AIR_delete(request,id):
     airfreight = Airfreight.objects.get(pk=id)
     airfreight.delete()
-    return redirect('/main/airfreight/list')
-
+    return redirect('/main/AIR_list.html')
 
 ###########################################################################################################
+def LCL_list(request):
+    context = {'lcl_list': LCL.objects.all()}
+    return render(request, "employee_register/LCL_list.html", context)
 
+def LCL_form(request, id=0):
+    
+    if request.method == "GET":
+        if id == 0:
+            form = LCLForm()
+        else:
+            lcl = LCL.objects.get(pk=id)
+            form = LCLForm(instance= lcl)
+        return render(request, "employee_register/LCL_form.html", {'form': form})
+    else:
+        if id == 0:
+            form = LCLForm(request.POST)
+        else:
+            lcl = LCL.objects.get(pk=id)
+            form = LCLForm(request.POST,instance= lcl)
+        if form.is_valid():
+            form.save()
+        return redirect('/main/LCL_list.html')
+
+
+def LCL_delete(request,id):
+    lcl = LCL.objects.get(pk=id)
+    lcl.delete()
+    return redirect('/main/LCL_list.html')
+
+#############################################################################################
 def error(request):
     return render(request, 'employee_register/404.html')
 
@@ -123,3 +151,30 @@ def search(request):
         'q': q,
  
     })
+    
+def searchair(request):
+    qs = Airfreight.objects.all()
+    q = request.GET.get('q', '') # q가 없으면 빈 문자열 리턴
+
+    if q:
+        qs = qs.filter(air_consol__icontains=q)|qs.filter(air_pic__icontains=q)|qs.filter(air_origin__icontains=q)\
+            
+
+    return render(request, 'employee_register/searchair.html', {
+        'airfreight_list': qs,
+        'q': q,
+ 
+    })    
+def searchlcl(request):
+    qs = LCL.objects.all()
+    q = request.GET.get('q', '') # q가 없으면 빈 문자열 리턴
+
+    if q:
+        qs = qs.filter(LCL_pic_code__icontains=q)|qs.filter(LCL_origin__icontains=q)|qs.filter(LCL_dest__icontains=q)\
+            |qs.filter(LCL_consol__icontains=q)
+
+    return render(request, 'employee_register/searchlcl.html', {
+        'lcl_list': qs,
+        'q': q,
+ 
+    })        

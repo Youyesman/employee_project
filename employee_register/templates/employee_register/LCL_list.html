@@ -10,6 +10,20 @@
 
         {% include 'sidebar.html'%}
         <!-- Content Wrapper -->
+        <div class="modal"> 
+            <div class="modal-content"> 
+                <span class="close-button">&times;</span> 
+                <h1 class="title">메일 보내기</h1> 
+                <form action="#post.php" method="POST"> 
+                  <label for="email">Email</label> 
+                  <input type="email" name="email" placeholder="Your email" required="required"> 
+                  <label></label> 
+                  <textarea name="message" placeholder="Test Message" required="required"></textarea> 
+                  <input type="button" id="cancel" value="취소"> 
+                  <input type="submit" id="submit" value="보내기"> 
+                </form> 
+            </div> 
+        </div>
         <div id="content-wrapper" class="d-flex flex-column">
 
             <!-- Main Content -->
@@ -21,7 +35,7 @@
                 <div class="container-fluid">
 
                     <!-- Page Heading -->
-                    <h1 class="h3 mb-4 text-gray-800">FCL</h1>
+                    <h1 class="h3 mb-4 text-gray-800">LCL</h1>
 
                     <div class="row">
 
@@ -36,22 +50,23 @@
                                     
                                     <!-- Circle Buttons (Default) -->
                                     <div class="table-responsive">
+                                        
                                         <th>
                                             <div>
-                                                <a href="{% url 'FCL_insert' %}" >
+                                                <a href="{% url 'LCL_insert' %}" >
                                                     <button type="button" class="btn btn-success" style= "margin-bottom: 1%; margin-top: 0.3%">+ADD</button>
                                                 </a>
-                                                <a href="{% url 'FCL_list' %}" >
+                                                <a href="{% url 'LCL_list' %}" >
                                                     <button type="button" class="btn btn-success" style= "float: right; margin-left: 1%; margin-top: 0.3%">View all</button>
                                                 </a>
                                                 <form
                                                 class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search" style="float: right; margin-top: 10%;"
-                                                action="{% url 'search' %}" method="get">
+                                                action="{% url 'searchlcl' %}" method="get">
                                                 <div class="input-group" >
                                                     <input type="text" class="form-control bg-light border-0 small" placeholder="Search for ... "
                                                         aria-label="Search" aria-describedby="basic-addon2" name="q" value="{{ q }}" style="margin-top: 3%;margin-right: 3%;">
                                                     <div class="input-group-append">
-                                                        <button class="btn btn-primary" type="submit">
+                                                        <button class="btn btn-primary" type="submit" style="margin-top: 10%;margin-right: 3%;">
                                                             <i class="fas fa-search fa-sm"></i>
                                                         </button>
                                                     </div>
@@ -66,49 +81,50 @@
                                                     
                                                 </tr>
                                                 <tr>
-                                                    <th style="text-align: center;" width="13%">Date</th>
-                                                    <th style="text-align: center;" width="10%">Pic</th>   
-								                    <th style="text-align: center;" width="7%">Origin</th>
+                                                    <th style="text-align: center;" width="10%">Date</th>
+                                                    <th style="text-align: center;">PIC</th>   
+								                    <th style="text-align: center;">Origin</th>
                                                     <th style="text-align: center;">Dest</th>
-                                                    <th style="text-align: center;">Carrier</th>
-                                                    <th style="text-align: center;">20ft</th>
-                                                    <th style="text-align: center;">40ft</th>
-                                                    <th style="text-align: center;" width="13%">Effective</th>
-                                                    <th style="text-align: center;" width = "5%">Details</th>
-                                                    <th style="text-align: center;" width = "5%">Update</th>
-                                                    <th style="text-align: center;" width = "5%">Delete</th>                               
-                                                    
-
+                                                    <th style="text-align: center;">Ofc</th>
+                                                    <th style="text-align: center;">Consol</th>
+                                                    <th style="text-align: center;">Ttime</th>
+                                                    <th style="text-align: center;" width="10%">Effective</th>
+                                                    <th width = "5%">Details</th>
+                                                    <th width = "5%">Update</th>
+                                                    <th width = "5%">Delete</th>
+                                                                             
                                                 </tr>
                                             </thead>
                                             <tfoot>
                                                 <tr>
-                                                    <th style="text-align: center;" width="13%">Date</th>
-                                                    <th style="text-align: center;" width="10%">Pic</th>   
-								                    <th style="text-align: center;" width="7%">Origin</th>
+                                                    <th style="text-align: center;" width="10%">Date</th>
+                                                    <th style="text-align: center;">PIC</th>   
+								                    <th style="text-align: center;">Origin</th>
                                                     <th style="text-align: center;">Dest</th>
-                                                    <th style="text-align: center;">Carrier</th>
-                                                    <th style="text-align: center;">20ft</th>
-                                                    <th style="text-align: center;">40ft</th>
-                                                    <th style="text-align: center;" width="13%">Effective</th>
-                                                    <th style="text-align: center;" width = "5%">Details</th>
-                                                    <th style="text-align: center;" width = "5%">Update</th>
-                                                    <th style="text-align: center;" width = "5%">Delete</th>                               
+                                                    <th style="text-align: center;">Ofc</th>
+                                                    <th style="text-align: center;">Consol</th>
+                                                    <th style="text-align: center;">Ttime</th>
+                                                    <th style="text-align: center;" width="10%">Effective</th>
+                                                    <th width = "5%">Details</th>
+                                                    <th width = "5%">Update</th>
+                                                    <th width = "5%">Delete</th>
                                                     
                                                 </tr>
                                             </tfoot>
                                             <tbody>
-                                              <tr>    
-                                                {% for employee in employee_list %}
-                                                <td style="text-align: center;">{{employee.chk_date}}</td>
-                                                <td style="text-transform :capitalize; text-align: center">{{employee.position}}</td>
-                                                <td style="text-transform :uppercase; text-align: center">{{employee.origin}}</td>
-                                                <td style="text-transform :uppercase; text-align: center">{{employee.dest}}</td>
-                                                <td style="text-transform :uppercase; text-align: center">{{employee.carrier}}</td>
-                                                <td style="text-align: center;">${{employee.twenty}}</td>
-                                                <td style="text-align: center;">${{employee.fourty}}</td>
-                                                <td style="text-align: center;">{{employee.effective}}</td>
-                                                <div class="modal fade" id="viewdetail{{employee.id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                                                                                              
+                                                <tr>
+                                                {% for lcl in lcl_list %}
+                                                <tr>
+                                                <td style="text-align: center;">{{lcl.LCL_chk_date}}</td>
+                                                <td style="text-transform :capitalize; text-align : center" >{{lcl.LCL_pic_code}}</td>
+                                                <td style="text-transform :uppercase; text-align : center">{{lcl.LCL_origin}}</td>
+                                                <td style="text-transform :uppercase; text-align : center">{{lcl.LCL_dest}}</td>
+                                                <td style="text-align: center;">${{lcl.LCL_ofc}}</td>
+                                                <td style="text-transform :uppercase; text-align : center">{{lcl.LCL_consol}}</td>
+                                                <td style="text-align: center;">{{lcl.LCL_ttime}}</td>
+                                                <td style="text-align: center;">{{lcl.LCL_effective}}</td>                                                
+                                                <div class="modal fade" id="viewdetail{{lcl.id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
                                                 aria-hidden="true">
                                                 <div class="modal-dialog" role="document">
                                                     <div class="modal-content">
@@ -118,42 +134,40 @@
                                                                 <span aria-hidden="true">×</span>
                                                             </button>
                                                         </div>
-                                                        <div class="modal-body">
-                                                            <p>Remark: {{employee.remark}}</p>
-                                                            <p style="text-transform :uppercase">SC No.: {{employee.scno}}</p>
-                                                            <p>Transit Time: {{employee.ttime}}days</p>
-                                                            
-                                                        </div>
+                                                        <div class="modal-body"><p>Remark: {{lcl.LCL_remark}}</p><p>Consol: {{lcl.LCL_consol}}</p></div>
                                                         <div class="modal-footer">
                                                             <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                                <td style="text-align: center;"><a class="btn btn-primary btn-circle btn-sm" data-toggle="modal" data-target="#viewdetail{{employee.id}}">
+                                                
+                                                <td style="text-align: center;"><a class="btn btn-primary btn-circle btn-sm" data-toggle="modal" data-target="#viewdetail{{lcl.id}}">
                                                     <i class="fa-solid fa-magnifying-glass"></i>
                                                     
                                                 </a>
                                                 </td>
-                                                
+                                                    
                                                 <td style="text-align: center;">
-                                                <a href="{% url 'FCL_update' employee.id %}">
+                                                <a href="{% url 'LCL_update' lcl.id %}">
                                                     <button type="button" class="btn btn-warning btn-circle btn-sm " id = "update" >
                                                         <i class="fas fa-pen"></i>
                                                         </button></a>
                                                 </td>
                                                 
+                                                
                                                 <td style="text-align: center;">
-                                                <form action="{% url 'FCL_delete' employee.id %}" method="post" class="d-inline">
+                                                <form action="{% url 'LCL_delete' lcl.id %}" method="post" class="d-inline">
                                                     {% csrf_token %}
                                                     <button type="submit" class="btn btn-danger btn-circle btn-sm"  id = "delete" >
                                                         <i class="fas fa-trash"></i>
                                                     </button></form>
                                                 </td>
-                                              </tr>
-                                                {% endfor %}   
+                                            </tr>
+                                            </tr>
+                                                {% endfor %}
                                             </tbody>
-
+                                            
                                         </table>
                                     </div>
                                 </div>
@@ -180,6 +194,9 @@
 
     {%include 'modal.html'%}
 
+
+    
+
     <!-- Bootstrap core JavaScript-->
     <script src="/static/vendor/jquery/jquery.min.js"></script>
     <script src="/static/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -190,6 +207,8 @@
     <!-- Custom scripts for all pages-->
     <script src="/static/js/sb-admin-2.min.js"></script>
     <script src="https://kit.fontawesome.com/999e0851cc.js" crossorigin="anonymous"></script>
+
+
 
 </body>
 

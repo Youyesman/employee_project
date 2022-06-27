@@ -8,11 +8,15 @@ urlpatterns = [
     path('FCL/', views.FCL_form,name='FCL_insert'), # get and post req. for insert operation
     path('FCL/<int:id>/', views.FCL_form,name='FCL_update'), # get and post req. for update operation
     path('FCL/delete/<int:id>/',views.FCL_delete,name='FCL_delete'),
-    path('FCL_list.html',views.FCL_list,name='FCL_list'), # get req. to retrieve and display all records
-    path('airfreight/', views.airfreight_form, name='airfreight_insert'),
-    path('airfreight/<int:id>/', views.airfreight_form,name='airfreight_update'), # get and post req. for update operation
-    path('airfreight/delete/<int:id>/',views.airfreight_delete,name='airfreight_delete'),
-    path('airfreight/list/',views.airfreight_list,name='airfreight_list'),
+    path('FCL_list.html',views.FCL_list,name='FCL_list'),
+    path('LCL/', views.LCL_form,name='LCL_insert'), # get and post req. for insert operation
+    path('LCL/<int:id>/', views.LCL_form,name='LCL_update'), # get and post req. for update operation
+    path('LCL/delete/<int:id>/',views.LCL_delete,name='LCL_delete'),
+    path('LCL_list.html',views.LCL_list,name='LCL_list'),# get req. to retrieve and display all records
+    path('AIR/', views.AIR_form, name='AIR_insert'),
+    path('AIR/<int:id>/', views.AIR_form,name='AIR_update'), # get and post req. for update operation
+    path('AIR/delete/<int:id>/',views.AIR_delete,name='AIR_delete'),
+    path('AIR_list.html/',views.AIR_list,name='AIR_list'),
     path('404.html', views.error, name='error'),
     path('blank.html', views.blank, name='blank'),
     path('buttons.html', views.buttons, name='buttons'),
@@ -28,6 +32,8 @@ urlpatterns = [
     path('utilities-color.html', views.utilitiescolor, name='utilitiescolor'),
     path('utilities-other.html', views.utilitiesother, name='utilitiesother'),
     path('search/',views.search, name="search"),
+    path('searchair/',views.searchair, name="searchair"),
+    path('searchlcl/',views.searchlcl, name="searchlcl"),
     
     
     

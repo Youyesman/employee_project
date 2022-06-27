@@ -21,7 +21,7 @@
                 <div class="container-fluid">
 
                     <!-- Page Heading -->
-                    <h1 class="h3 mb-4 text-gray-800">Buttons</h1>
+                    <h1 class="h3 mb-4 text-gray-800">Air</h1>
 
                     <div class="row">
 
@@ -30,7 +30,7 @@
                             <!-- Circle Buttons -->
                             <div class="card shadow mb-4">
                                 <div class="card-header py-3">
-                                    <h6 class="m-0 font-weight-bold text-primary">OceanFreight</h6>
+                                    <h6 class="m-0 font-weight-bold text-primary">Air freight</h6>
                                 </div>
                                 <div class="card-body">
                                     
@@ -38,20 +38,20 @@
                                     <div class="table-responsive">
                                         <th>
                                             <div>
-                                                <a href="{% url 'employee_insert' %}" >
-                                                    <button type="button" class="btn btn-success" style= "margin-bottom: 1%;">+ADD</button>
+                                                <a href="{% url 'AIR_insert' %}" >
+                                                    <button type="button" class="btn btn-success" style= "margin-bottom: 1%; margin-top: 0.3%">+ADD</button>
                                                 </a>
-                                                <a href="{% url 'employee_list' %}" >
-                                                    <button type="button" class="btn btn-success" style= "float: right; margin-left: 1%;">View all</button>
+                                                <a href="{% url 'AIR_list' %}" >
+                                                    <button type="button" class="btn btn-success" style= "float: right; margin-left: 1%; margin-top: 0.3%">View all</button>
                                                 </a>
                                                 <form
                                                 class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search" style="float: right; margin-top: 10%;"
-                                                action="{% url 'search' %}" method="get">
+                                                action="{% url 'searchair' %}" method="get">
                                                 <div class="input-group" >
-                                                    <input type="text" class="form-control bg-light border-0 small" placeholder="Input Destination"
-                                                        aria-label="Search" aria-describedby="basic-addon2" name="q" value="{{ q }}">
+                                                    <input type="text" class="form-control bg-light border-0 small" placeholder="Search for ..."
+                                                        aria-label="Search" aria-describedby="basic-addon2" name="q" value="{{ q }}" style="margin-top: 3%;margin-right: 3%;">
                                                     <div class="input-group-append">
-                                                        <button class="btn btn-primary" type="submit">
+                                                        <button class="btn btn-primary" type="submit" style="margin-top: 10%;margin-right: 3%;">
                                                             <i class="fas fa-search fa-sm"></i>
                                                         </button>
                                                     </div>
@@ -66,58 +66,102 @@
                                                     
                                                 </tr>
                                                 <tr>
-                                                    <th width="13%">Date</th>   
-								                    <th width="7%">Origin</th>
-                                                    <th>Dest</th>
-                                                    <th>Carrier</th>
-                                                    <th>20ft</th>
-                                                    <th>40ft</th>
-                                                    <th width="13%">Effective</th>
-                                                    <th width="13%">Scno</th>
-                                                    <th width="10%">Pic</th>
-								                    <th>&nbsp;</th>
-                                                    <th>&nbsp;</th>                                
-                                                    
-
+                                                    <th style="text-align: center;" width="10%">Date</th>
+                                                    <th style="text-align: center;">consol</th>           
+                                                    <th style="text-align: center;">pic</th>
+                                                    <th style="text-align: center;">origin</th>
+                                                    <th style="text-align: center;">dest</th>
+                                                    <th style="text-align: center;">carrier</th>
+                                                    <th style="text-align: center;">min</th>
+                                                    <th style="text-align: center;">normal</th>
+                                                    <th style="text-align: center;">45kg</th>
+                                                    <th style="text-align: center;">100kg</th>
+                                                    <th style="text-align: center;">300kg</th>
+                                                    <th style="text-align: center;">500kg</th>
+                                                    <th style="text-align: center;">1000kg</th>
+                                                    <th width = "5%">Details</th>
+                                                    <th width = "5%">Update</th>
+                                                    <th width = "5%">Delete</th>
+                                                
                                                 </tr>
                                             </thead>
                                             <tfoot>
                                                 <tr>
-                                                    <th width="13%">Date</th>   
-								                    <th width="7%">Origin</th>
-                                                    <th>Dest</th>
-                                                    <th>Carrier</th>
-                                                    <th>20ft</th>
-                                                    <th>40ft</th>
-                                                    <th width="13%">Effective</th>
-                                                    <th width="13%">Scno</th>
-                                                    <th width="10%">Pic</th>
-								                    <th>&nbsp;</th>
-                                                    <th>&nbsp;</th>                                
+                                                    <th style="text-align: center;" width="10%">Date</th>
+                                                    <th style="text-align: center;">consol</th>           
+                                                    <th style="text-align: center;">pic</th>
+                                                    <th style="text-align: center;">origin</th>
+                                                    <th style="text-align: center;">dest</th>
+                                                    <th style="text-align: center;">carrier</th>
+                                                    <th style="text-align: center;">min</th>
+                                                    <th style="text-align: center;">normal</th>
+                                                    <th style="text-align: center;">45kg</th>
+                                                    <th style="text-align: center;">100kg</th>
+                                                    <th style="text-align: center;">300kg</th>
+                                                    <th style="text-align: center;">500kg</th>
+                                                    <th style="text-align: center;">1000kg</th>
+                                                    <th width = "5%">Details</th>
+                                                    <th width = "5%">Update</th>
+                                                    <th width = "5%">Delete</th>
                                                     
                                                 </tr>
                                             </tfoot>
                                             <tbody>
                                               <tr>    
-                                                {% for employee in employee_list %}
-                                                <td>{{employee.chk_date}}</td>
-                                                <td style="text-transform :uppercase">{{employee.origin}}</td>
-                                                <td style="text-transform :uppercase">{{employee.dest}}</td>
-                                                <td style="text-transform :uppercase">{{employee.carrier}}</td>
-                                                <td>{{employee.twenty}}</td>
-                                                <td>{{employee.fourty}}</td>
-                                                <td>{{employee.effective}}</td>
-                                                <td style="text-transform :uppercase">{{employee.scno}}</td>
-                                                <td style="text-transform :capitalize">{{employee.position}}</td>
-                                                <td>
-                                                <a href="{% url 'employee_update' employee.id %}">
+                                                {% for airfreight in airfreight_list %}
+                                                <td style="text-align: center;">{{airfreight.air_chk_date}}</td>
+                                                <td style="text-align: center;">{{airfreight.air_consol}}</td>                
+                                                <td style="text-align: center;">{{airfreight.air_pic}}</td>                                                
+                                                <td style="text-align: center;">{{airfreight.air_origin}}</td>
+                                                <td style="text-align: center;">{{airfreight.air_dest}}</td>
+                                                <td style="text-align: center;">{{airfreight.air_carrier}}</td>
+                                                <td style="text-align: center;">{{airfreight.air_min}}</td>
+                                                <td style="text-align: center;">{{airfreight.air_normal}}</td>                
+                                                <td style="text-align: center;">{{airfreight.air_45kg}} </td>
+                                                <td style="text-align: center;">{{airfreight.air_100kg}} </td> 
+                                                <td style="text-align: center;">{{airfreight.air_300kg}} </td>
+                                                <td style="text-align: center;">{{airfreight.air_500kg}} </td>  
+                                                <td style="text-align: center;">{{airfreight.air_1000kg}} </td>
+                                                
+                                                <div class="modal fade" id="viewdetail{{airfreight.id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                                                aria-hidden="true">
+                                                <div class="modal-dialog" role="document">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="exampleModalLabel">Others</h5>
+                                                            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                                                <span aria-hidden="true">×</span>
+                                                            </button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <p>Remark : {{airfreight.air_remark}}</p>
+                                                            <p style="text-transform :uppercase">SC No. : {{employee.scno}}</p>
+                                                            <p>Transit Time : {{employee.ttime}}days</p>
+                                                            <p>T/S point : {{airfreight.air_tspoint}} </p>
+                                                            <p>FSC : {{airfreight.air_fsc}} </p>
+                                                            <p>ISS : {{airfreight.air_iss}} </p>
+                                                            
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                                <td style="text-align: center;"><a class="btn btn-primary btn-circle btn-sm" data-toggle="modal" data-target="#viewdetail{{airfreight.id}}">
+                                                    <i class="fa-solid fa-magnifying-glass"></i>
+                                                    
+                                                </a>
+                                                
+                                                <td style="text-align: center;">
+                                                <a href="{% url 'AIR_update' airfreight.id %}">
                                                     <button type="button" class="btn btn-warning btn-circle btn-sm " id = "update" >
                                                         <i class="fas fa-pen"></i>
                                                         </button></a>
                                                 </td>
                                                 
-                                                <td>
-                                                <form action="{% url 'employee_delete' employee.id %}" method="post" class="d-inline">
+                                                <td style="text-align: center;">
+                                                <form action="{% url 'AIR_delete' airfreight.id %}" method="post" class="d-inline">
                                                     {% csrf_token %}
                                                     <button type="submit" class="btn btn-danger btn-circle btn-sm"  id = "delete" >
                                                         <i class="fas fa-trash"></i>
@@ -162,6 +206,7 @@
 
     <!-- Custom scripts for all pages-->
     <script src="/static/js/sb-admin-2.min.js"></script>
+    <script src="https://kit.fontawesome.com/999e0851cc.js" crossorigin="anonymous"></script>
 
 </body>
 

@@ -22,7 +22,7 @@
                 <div class="container-fluid">
 
                     <!-- Page Heading -->
-                    <h1 class="h3 mb-4 text-gray-800">FCL</h1>
+                    <h1 class="h3 mb-4 text-gray-800">Buttons</h1>
 
                     <div class="row">
 
@@ -34,7 +34,8 @@
                                     <h6 class="m-0 font-weight-bold text-primary">OceanFreight</h6>
                                 </div>
                                 <div class="card-body">
-                                    <p>Input your FCL rate</p>
+                                    <p>Use Font Awesome Icons (included with this theme package) along with the circle
+                                        buttons as shown in the examples below!</p>
                                     <!-- Circle Buttons (Default) -->
                                     <div class="table-responsive">
 
@@ -66,22 +67,19 @@
                                                 <form action="" method="post" autocomplete="off">
                                                     {% csrf_token %}
                                                             
-                                                            <div>{{form.chk_date|as_crispy_field}}</div>
-                                                            <div>{{form.carrier|as_crispy_field}}</div>
-                                                            <div>{{form.origin|as_crispy_field}}</div>
-                                                            <div>{{form.dest|as_crispy_field}}</div>                                                        
-                                                            <div>{{form.twenty|as_crispy_field}}</div>
-                                                            <div>{{form.fourty|as_crispy_field}}</div>
-                                                            <div>{{form.freq|as_crispy_field}}</div>
-                                                            <div>{{form.ttime|as_crispy_field}}</div>                                                          
-                                                            <div>{{form.effective|as_crispy_field}}</div>
-                                                            <div>{{form.scno|as_crispy_field}}</div>
-                                                            <div>{{form.position|as_crispy_field}}</div>
-                                                            <div>{{form.remark|as_crispy_field}}</div>
-                                                            <tr>                                                        
+                                                            <div>{{form.LCL_chk_date|as_crispy_field}}</div>
+                                                            <div>{{form.LCL_pic_code|as_crispy_field}}</div>
+                                                            <div>{{form.LCL_origin|as_crispy_field}}</div>
+                                                            <div>{{form.LCL_dest|as_crispy_field}}</div>                                                        
+                                                            <div>{{form.LCL_ofc|as_crispy_field}}</div>
+                                                            <div>{{form.LCL_consol|as_crispy_field}}</div>
+                                                            <div>{{form.LCL_ttime|as_crispy_field}}</div>                                                          
+                                                            <div>{{form.LCL_effective|as_crispy_field}}</div>
+                                                            <div>{{form.LCL_remark|as_crispy_field}}</div>
+                                                                                                                        <tr>                                                        
                                                             <button type="submit" class="btn btn-success btn-block btn-lg"><i class="fas fa-database"></i>
                                                                 Submit</button>
-                                                            <a href="{% url 'FCL_list' %}" class="btn btn-secondary btn-block btn-lg">
+                                                            <a href="{% url 'LCL_list' %}" class="btn btn-secondary btn-block btn-lg">
                                                                 <i class="fas fa-stream"></i> Back to list
                                                             </a>
                                                             </tr>  

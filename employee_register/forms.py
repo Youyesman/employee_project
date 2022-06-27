@@ -1,5 +1,5 @@
 from django import forms
-from .models import Employee
+from .models import LCL, Employee
 from .models import Airfreight
 
 
@@ -84,4 +84,30 @@ class AirfreightForm(forms.ModelForm) :
         self.fields['air_remark'].required = False
         
         
+class LCLForm(forms.ModelForm) :
+    
+    class Meta:
+        model = LCL
+        fields = '__all__'
+        # labels = {
+            
+        # }
+        widgets = {
+        'LCL_chk_date': forms.DateInput(format=('%m/%d/%Y'), attrs={'class':'form-control', 'placeholder':'Select a date', 'type':'date'}),
+        'LCL_effective': forms.DateInput(format=('%m/%d/%Y'), attrs={'class':'form-control', 'placeholder':'Select a date', 'type':'date'}),
+        }
         
+        
+        
+    def __init__(self, *args, **kwargs):
+        super(LCLForm,self).__init__(*args, **kwargs)
+        # self.fields['position'].empty_label = "Select"
+        self.fields['LCL_chk_date'].required = False  #필수 입력값 아님
+        self.fields['LCL_pic_code'].required = False
+        self.fields['LCL_origin'].required = False
+        self.fields['LCL_dest'].required = False
+        self.fields['LCL_ofc'].required = False
+        self.fields['LCL_consol'].required = False
+        self.fields['LCL_ttime'].required = False        
+        self.fields['LCL_effective'].required = False
+        self.fields['LCL_remark'].required = False
