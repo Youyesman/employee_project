@@ -1,15 +1,21 @@
 from django.shortcuts import render, redirect
 from .forms import AirfreightForm, EmployeeForm, LCLForm
 from .models import LCL, Airfreight, Employee
-from django.db.models import Q
+from django.contrib.auth.decorators import login_required
+from django.contrib.admin.views.decorators import staff_member_required
+from employee_project.decorators import *
+
 
 
 ###########################################################################################################
+@login_required(login_url='users:login')
+@staff_member_required(login_url='/main/404.html')
 def FCL_list(request):
     context = {'employee_list': Employee.objects.all()}
     return render(request, "employee_register/FCL_list.html", context)
 
-
+@login_required(login_url='users:login')
+@staff_member_required(login_url='/main/404.html')
 def FCL_form(request, id=0):
     
     if request.method == "GET":
@@ -29,18 +35,22 @@ def FCL_form(request, id=0):
             form.save()
         return redirect('/main/FCL_list.html')
 
-
+@login_required(login_url='users:login')
+@staff_member_required(login_url='/main/404.html')
 def FCL_delete(request,id):
     employee = Employee.objects.get(pk=id)
     employee.delete()
     return redirect('/main/FCL_list.html')
 
 ###########################################################################################################
-
+@login_required(login_url='users:login')
+@staff_member_required(login_url='/main/404.html')
 def AIR_list(request):
     context = {'airfreight_list': Airfreight.objects.all()}
     return render(request, "employee_register/AIR_list.html", context)
 
+@login_required(login_url='users:login')
+@staff_member_required(login_url='/main/404.html')
 def AIR_form(request, id=0):
     
     if request.method == "GET":
@@ -60,17 +70,22 @@ def AIR_form(request, id=0):
             form.save()
         return redirect('/main/AIR_list.html')
 
-
+@login_required(login_url='users:login')
+@staff_member_required(login_url='/main/404.html')
 def AIR_delete(request,id):
     airfreight = Airfreight.objects.get(pk=id)
     airfreight.delete()
     return redirect('/main/AIR_list.html')
 
 ###########################################################################################################
+@login_required(login_url='users:login')
+@staff_member_required(login_url='/main/404.html')
 def LCL_list(request):
     context = {'lcl_list': LCL.objects.all()}
     return render(request, "employee_register/LCL_list.html", context)
 
+@login_required(login_url='users:login')
+@staff_member_required(login_url='/main/404.html')
 def LCL_form(request, id=0):
     
     if request.method == "GET":
@@ -90,7 +105,8 @@ def LCL_form(request, id=0):
             form.save()
         return redirect('/main/LCL_list.html')
 
-
+@login_required(login_url='users:login')
+@staff_member_required(login_url='/main/404.html')
 def LCL_delete(request,id):
     lcl = LCL.objects.get(pk=id)
     lcl.delete()
@@ -117,9 +133,6 @@ def forgotpassword(request):
 
 def index(request):
     return render(request, 'employee_register/index.html')
-
-def login(request):
-    return render(request, 'employee_register/login.html')
 
 def register(request):
     return render(request, 'employee_register/register.html')
@@ -158,6 +171,7 @@ def searchair(request):
 
     if q:
         qs = qs.filter(air_consol__icontains=q)|qs.filter(air_pic__icontains=q)|qs.filter(air_origin__icontains=q)\
+            |qs.filter(air_dest__icontains=q)
             
 
     return render(request, 'employee_register/searchair.html', {
@@ -178,3 +192,7 @@ def searchlcl(request):
         'q': q,
  
     })        
+    
+    
+    ###################################################################################################################################
+

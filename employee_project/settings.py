@@ -140,6 +140,8 @@ STATICFILES_DIRS = [
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-LOGIN_REDIRECT_URL = '/main/oceanfreight'
+LOGIN_REDIRECT_URL = '/main'
 
 LOGOUT_REDIRECT_URL = '/users/login/'
+
+AUTH_USER_MODEL = 'auth.User'

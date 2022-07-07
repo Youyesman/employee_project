@@ -24,7 +24,6 @@ urlpatterns = [
     path('charts.html', views.charts, name='charts'),
     path('forgot-password.html', views.forgotpassword, name='forgotpassword'),
     path('index.html', views.index, name='index'),
-    path('login.html', views.login, name='login'),
     path('register.html', views.register, name='register'),
     path('table.html', views.table, name='table'),
     path('utilities-animation.html', views.utilitiesanimation, name='utilitiesanimation'),
@@ -34,6 +33,7 @@ urlpatterns = [
     path('search/',views.search, name="search"),
     path('searchair/',views.searchair, name="searchair"),
     path('searchlcl/',views.searchlcl, name="searchlcl"),
+    
     
     
     

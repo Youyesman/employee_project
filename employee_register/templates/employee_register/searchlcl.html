@@ -1,146 +1,178 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
-{% include 'head.html' %}
+  {% include 'head.html' %}
 
-<body id="page-top">
-
+  <body id="page-top">
     <!-- Page Wrapper -->
     <div id="wrapper">
+      {% include 'sidebar.html'%}
+      <!-- Content Wrapper -->
+      <div id="content-wrapper" class="d-flex flex-column">
+        <!-- Main Content -->
+        <div id="content">
+          {% include 'topbar.html'%}
 
-        {% include 'sidebar.html'%}
-        <!-- Content Wrapper -->
-        <div id="content-wrapper" class="d-flex flex-column">
+          <!-- Begin Page Content -->
+          <div class="container-fluid">
+            <!-- Page Heading -->
+            <h1 class="h3 mb-4 text-gray-800">FCL</h1>
 
-            <!-- Main Content -->
-            <div id="content">
-
-                {% include 'topbar.html'%}
-
-                <!-- Begin Page Content --> 
-                <div class="container-fluid">
-
-                    <!-- Page Heading -->
-                    <h1 class="h3 mb-4 text-gray-800">FCL</h1>
-
-                    <div class="row">
-
-                        <div class="col-lg-12">
-
-                            <!-- Circle Buttons -->
-                            <div class="card shadow mb-4">
-                                <div class="card-header py-3">
-                                    <h6 class="m-0 font-weight-bold text-primary">OceanFreight</h6>
-                                </div>
-                                <div class="card-body">
-                                    
-                                    <!-- Circle Buttons (Default) -->
-                                    <div class="table-responsive">
-                                        <th>
-                                            <div>
-                                                <a href="{% url 'LCL_insert' %}" >
-                                                    <button type="button" class="btn btn-success" style= "margin-bottom: 1%;">+ADD</button>
-                                                </a>
-                                                <a href="{% url 'LCL_list' %}" >
-                                                    <button type="button" class="btn btn-success" style= "float: right; margin-left: 1%;">View all</button>
-                                                </a>
-                                                <form
-                                                class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search" style="float: right; margin-top: 10%;"
-                                                action="{% url 'searchlcl' %}" method="get">
-                                                <div class="input-group" >
-                                                    <input type="text" class="form-control bg-light border-0 small" placeholder="Search for ... "
-                                                        aria-label="Search" aria-describedby="basic-addon2" name="q" value="{{ q }}">
-                                                    <div class="input-group-append">
-                                                        <button class="btn btn-primary" type="submit">
-                                                            <i class="fas fa-search fa-sm"></i>
-                                                        </button>
-                                                    </div>
-                                                </div>
-                                                </form>
-                                            </div>
-                                        </th>
-
-                                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                                            <thead>
-                                                <tr>
-                                                    
-                                                </tr>
-                                                <tr>
-                                                    <th>Date</th>
-                                                    <th>PIC</th>   
-								                    <th>Origin</th>
-                                                    <th>Dest</th>
-                                                    <th>Ofc</th>
-                                                    <th>consol</th>
-                                                    <th>ttime</th>
-                                                    <th>effective</th>
-                                                    <th>remark</th>                          
-                                                </tr>
-                                            </thead>
-                                            <tfoot>
-                                                <tr>
-                                                    <th>Date</th>
-                                                    <th>PIC</th>   
-								                    <th>Origin</th>
-                                                    <th>Dest</th>
-                                                    <th>Ofc</th>
-                                                    <th>consol</th>
-                                                    <th>ttime</th>
-                                                    <th>effective</th>
-                                                    <th>remark</th>
-                                                </tr>
-                                            </tfoot>
-                                            <tbody>
-                                              <tr>    
-                                                {% for lcl in lcl_list %}
-                                                <td>{{lcl.LCL_chk_date}}</td>
-                                                <td>{{lcl.LCL_pic_code}}</td>
-                                                <td style="text-transform :uppercase">{{lcl.LCL_origin}}</td>
-                                                <td style="text-transform :uppercase">{{lcl.LCL_dest}}</td>
-                                                <td style="text-transform :uppercase">{{lcl.LCL_ofc}}</td>
-                                                <td style="text-transform :uppercase">{{lcl.LCL_consol}}</td>
-                                                <td>{{lcl.LCL_ttime}}</td>
-                                                <td>{{lcl.LCL_effective}}</td>
-                                                <td>{{lcl.LCL_remark}}</td>
-                                                <td>
-                                                <a href="{% url 'LCL_update' lcl.id %}">
-                                                    <button type="button" class="btn btn-warning btn-circle btn-sm " id = "update" >
-                                                        <i class="fas fa-pen"></i>
-                                                        </button></a>
-                                                </td>
-                                                
-                                                <td>
-                                                <form action="{% url 'LCL_delete' lcl.id %}" method="post" class="d-inline">
-                                                    {% csrf_token %}
-                                                    <button type="submit" class="btn btn-danger btn-circle btn-sm"  id = "delete" >
-                                                        <i class="fas fa-trash"></i>
-                                                    </button></form>
-                                                </td>
-                                              </tr>
-                                                {% endfor %}   
-                                            </tbody>
-
-                                        </table>
-                                    </div>
-                                </div>
-                            </div>                           
-
+            <div class="row">
+              <div class="col-lg-12">
+                <!-- Circle Buttons -->
+                <div class="card shadow mb-4">
+                  <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">
+                      OceanFreight
+                    </h6>
+                  </div>
+                  <div class="card-body">
+                    <!-- Circle Buttons (Default) -->
+                    <div class="table-responsive">
+                      <th>
+                        <div>
+                          <a href="{% url 'LCL_insert' %}">
+                            <button
+                              type="button"
+                              class="btn btn-success"
+                              style="margin-bottom: 1%"
+                            >
+                              +ADD
+                            </button>
+                          </a>
+                          <a href="{% url 'LCL_list' %}">
+                            <button
+                              type="button"
+                              class="btn btn-success"
+                              style="float: right; margin-left: 1%"
+                            >
+                              View all
+                            </button>
+                          </a>
+                          <form
+                            class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search"
+                            style="float: right; margin-top: 10%"
+                            action="{% url 'searchlcl' %}"
+                            method="get"
+                          >
+                            <div class="input-group">
+                              <input
+                                type="text"
+                                class="form-control bg-light border-0 small"
+                                placeholder="Search for ... "
+                                aria-label="Search"
+                                aria-describedby="basic-addon2"
+                                name="q"
+                                value="{{ q }}"
+                              />
+                              <div class="input-group-append">
+                                <button class="btn btn-primary" type="submit">
+                                  <i class="fas fa-search fa-sm"></i>
+                                </button>
+                              </div>
+                            </div>
+                          </form>
                         </div>
+                      </th>
 
-                    
+                      <table
+                        class="table table-bordered"
+                        id="dataTable"
+                        width="100%"
+                        cellspacing="0"
+                      >
+                        <thead>
+                          <tr></tr>
+                          <tr>
+                            <th>Date</th>
+                            <th>PIC</th>
+                            <th>Origin</th>
+                            <th>Dest</th>
+                            <th>Ofc</th>
+                            <th>consol</th>
+                            <th>ttime</th>
+                            <th>effective</th>
+                            <th>remark</th>
+                          </tr>
+                        </thead>
+                        <tfoot>
+                          <tr>
+                            <th>Date</th>
+                            <th>PIC</th>
+                            <th>Origin</th>
+                            <th>Dest</th>
+                            <th>Ofc</th>
+                            <th>consol</th>
+                            <th>ttime</th>
+                            <th>effective</th>
+                            <th>remark</th>
+                          </tr>
+                        </tfoot>
+                        <tbody>
+                          <tr>
+                            {% for lcl in lcl_list %}
+                            <td>{{lcl.LCL_chk_date}}</td>
+                            <td>{{lcl.LCL_pic_code}}</td>
+                            <td style="text-transform: uppercase">
+                              {{lcl.LCL_origin}}
+                            </td>
+                            <td style="text-transform: uppercase">
+                              {{lcl.LCL_dest}}
+                            </td>
+                            <td style="text-transform: uppercase">
+                              {{lcl.LCL_ofc}}
+                            </td>
+                            <td style="text-transform: uppercase">
+                              {{lcl.LCL_consol}}
+                            </td>
+                            <td>{{lcl.LCL_ttime}}</td>
+                            <td>{{lcl.LCL_effective}}</td>
+                            <td>{{lcl.LCL_remark}}</td>
+                            <td>
+                              <a href="{% url 'LCL_update' lcl.id %}">
+                                <button
+                                  type="button"
+                                  class="btn btn-warning btn-circle btn-sm"
+                                  id="update"
+                                >
+                                  <i class="fas fa-pen"></i></button
+                              ></a>
+                            </td>
+
+                            <td>
+                              <form
+                                action="{% url 'LCL_delete' lcl.id %}"
+                                method="post"
+                                class="d-inline"
+                              >
+                                {% csrf_token %}
+                                <button
+                                  type="submit"
+                                  class="btn btn-danger btn-circle btn-sm"
+                                  id="delete"
+                                >
+                                  <i class="fas fa-trash"></i>
+                                </button>
+                              </form>
+                            </td>
+                          </tr>
+                          {% endfor %}
+                        </tbody>
+                      </table>
                     </div>
-
+                  </div>
                 </div>
-                <!-- /.container-fluid -->
-
+              </div>
             </div>
-            <!-- End of Main Content -->
-
-            {% include 'footer.html'%}
-
+          </div>
+          <!-- /.container-fluid -->
         </div>
-        <!-- End of Content Wrapper -->
+        <!-- End of Main Content -->
 
+        {% include 'footer.html'%}
+      </div>
+      <!-- End of Content Wrapper -->
     </div>
     <!-- End of Page Wrapper -->
 
@@ -155,7 +187,5 @@
 
     <!-- Custom scripts for all pages-->
     <script src="/static/js/sb-admin-2.min.js"></script>
-
-</body>
-
+  </body>
 </html>

@@ -21,6 +21,10 @@ class Employee(models.Model):
     scno = models.CharField(max_length=100)
     remark = models.CharField(max_length=100)
     position = models.CharField(max_length=100)
+    class Meta:
+        permissions = [
+            ('can_view_goldpage', 'Can View Goldpage')
+        ]
     # position = models.ForeignKey(Position,on_delete=models.CASCADE)
     
 class Airfreight(models.Model):
