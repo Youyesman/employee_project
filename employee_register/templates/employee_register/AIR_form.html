@@ -32,7 +32,7 @@
                             <!-- Circle Buttons -->
                             <div class="card shadow mb-4">
                                 <div class="card-header py-3">
-                                    <h6 class="m-0 font-weight-bold text-primary">OceanFreight</h6>
+                                    <h6 class="m-0 font-weight-bold text-primary">AirFreight</h6>
                                 </div>
                                 <div class="card-body">
                                     <p>Use Font Awesome Icons (included with this theme package) along with the circle
@@ -67,31 +67,93 @@
                                                 {% if user.is_authenticated %}
                                                 <form action="" method="post" autocomplete="off">
                                                     {% csrf_token %}
-                                                            
-                                                            <div>{{form.air_consol|as_crispy_field}}</div>
-                                                            <div>{{form.air_pic|as_crispy_field}}</div>
-                                                            <div>{{form.air_chk_date|as_crispy_field}}</div>
-                                                            <div>{{form.air_origin|as_crispy_field}}</div>                                                        
-                                                            <div>{{form.air_dest|as_crispy_field}}</div>
-                                                            <div>{{form.air_carrier|as_crispy_field}}</div>
-                                                            <div>{{form.air_min|as_crispy_field}}</div>
-                                                            <div>{{form.air_normal|as_crispy_field}}</div>                                                          
-                                                            <div>{{form.air_45kg|as_crispy_field}}</div>
-                                                            <div>{{form.air_100kg|as_crispy_field}}</div>
-                                                            <div>{{form.air_300kg|as_crispy_field}}</div>
-                                                            <div>{{form.air_500kg|as_crispy_field}}</div>
-                                                            <div>{{form.air_1000kg|as_crispy_field}}</div>
-                                                            <div>{{form.air_fsc|as_crispy_field}}</div>
-                                                            <div>{{form.air_iss|as_crispy_field}}</div>
-                                                            <div>{{form.air_tspoint|as_crispy_field}}</div>
+                                                    <div style="width: 100%;">
+                                                        <p style="float: left; margin-right:1%; font-size: larger; vertical-align: middle;">Date: </p>  <div style="float: left; width: 20% ; margin-right: 2%; vertical-align: middle;">{{form.air_chk_date|as_crispy_field}}</div> 
+                                                    <p style="float: left; margin-right:1%; font-size: larger; vertical-align: middle;" >Effective: </p><div style="float: left; width: 20%; vertical-align: middle;">{{form.air_effective|as_crispy_field}}</div>
+                                                    </div>
+                                                    
+                                                    <table class="table table-bordered" id="dataTable" width="50%" cellspacing="0">
+                                                        <thead style="width: 100%;">
+                                                            <tr style="width: 100px;">
+                                                                
+                                                                <th style="text-align: center; width: 5%;">Consol</th>
+                                                                <th style="text-align: center; width: 5%;">Origin</th>
+                                                                <th style="text-align: center; width: 5%;">Destination</th>
+                                                                <th style="text-align: center; width: 5%;">Carrier</th>
+                                                                
+                                                                <th style="text-align: center; width: 5%; color: red;">Min</th>
+                                                                <th style="text-align: center; width: 5%; color: red;">Normal</th>
+                                                                <th style="text-align: center; width: 5%; color: red;">+45kg</th>
+                                                                <th style="text-align: center; width: 5%; color: red;">+100kg</th>
+                                                                <th style="text-align: center; width: 5%; color: red;">+300kg</th>
+                                                                <th style="text-align: center; width: 5%; color: red;">+500kg</th>
+                                                                <th style="text-align: center; width: 5%; color: red;">+1000kg</th>
+                                                                <th style="text-align: center; width: 5%; color: red;">Fsc</th>
+                                                                <th style="text-align: center; width: 5%; color: red;">Iss</th>
+                                                                <th style="text-align: center; width: 5%;">Schedule</th>
+                                                                <th style="text-align: center; width: 5%;">T/s point</th>
+                        
+                                                            </tr>
+                                                        </thead>
+                                                        <tfoot>
+                                                            <tr>
+                                                                
+                                                                <th style="text-align: center; width: 5%;">Consol</th>
+                                                                <th style="text-align: center; width: 5%;">Origin</th>
+                                                                <th style="text-align: center; width: 5%;">Destination</th>
+                                                                <th style="text-align: center; width: 5%;">Carrier</th>
+                                                                
+                                                                <th style="text-align: center; width: 5%; color: red;">Min</th>
+                                                                <th style="text-align: center; width: 5%; color: red;">Normal</th>
+                                                                <th style="text-align: center; width: 5%; color: red;">+45kg</th>
+                                                                <th style="text-align: center; width: 5%; color: red;">+100kg</th>
+                                                                <th style="text-align: center; width: 5%; color: red;">+300kg</th>
+                                                                <th style="text-align: center; width: 5%; color: red;">+500kg</th>
+                                                                <th style="text-align: center; width: 5%; color: red;">+1000kg</th>
+                                                                <th style="text-align: center; width: 5%; color: red;">Fsc</th>
+                                                                <th style="text-align: center; width: 5%; color: red;">Iss</th>
+                                                                <th style="text-align: center; width: 5%; ">Schedule</th>
+                                                                <th style="text-align: center; width: 5%; ">T/s point</th>
 
-                                                            <tr>                                                        
+                                                                
+                                                                
+                                                                
+                                                            </tr> 
+                                                        </tfoot>
+                                                        <tbody>
+
+                                                            
+                                                            <td>{{form.air_consol|as_crispy_field}}</td>
+                                                            <td>{{form.air_origin|as_crispy_field}}</td>
+                                                            <td>{{form.air_dest|as_crispy_field}}</td>
+                                                            <td>{{form.air_carrier|as_crispy_field}}</td>
+                                                            
+                                                            <td>{{form.air_min|as_crispy_field}}</td>
+                                                            <td>{{form.air_normal|as_crispy_field}}</td>
+                                                            <td>{{form.air_45kg|as_crispy_field}}</td>
+                                                            <td>{{form.air_100kg|as_crispy_field}}</td>
+                                                            <td>{{form.air_300kg|as_crispy_field}}</td>
+                                                            <td>{{form.air_500kg|as_crispy_field}}</td>
+                                                            <td>{{form.air_1000kg|as_crispy_field}}</td>
+                                                            <td>{{form.air_fsc|as_crispy_field}}</td>
+                                                            <td>{{form.air_iss|as_crispy_field}}</td>
+                                                            <td>{{form.air_skdl|as_crispy_field}}</td>
+                                                            <td>{{form.air_tspoint|as_crispy_field}}</td>
+
+
+                                                        </tbody>
+                                                        </table>
+                                                        
+                                                        <td>
+                                                                
+
+                                                            <div style="clear: both;"><br><strong style="color: red;">Remark: </strong><br><br> {{form.air_remark|as_crispy_field}}</div>
                                                             <button type="submit" class="btn btn-success btn-block btn-lg"><i class="fas fa-database"></i>
                                                                 Submit</button>
                                                             <a href="{% url 'AIR_list' %}" class="btn btn-secondary btn-block btn-lg">
                                                                 <i class="fas fa-stream"></i> Back to list
                                                             </a>
-                                                            </tr>  
+                                                        </td>
                                                 </form>
                                                 
                                                 {%else%}

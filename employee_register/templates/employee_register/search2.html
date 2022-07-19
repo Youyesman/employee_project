@@ -1,0 +1,168 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+{% include 'head.html' %}
+
+<body id="page-top">
+
+    <!-- Page Wrapper -->
+    <div id="wrapper">
+
+        {% include 'sidebar.html'%}
+        <!-- Content Wrapper -->
+        <div id="content-wrapper" class="d-flex flex-column">
+
+            <!-- Main Content -->
+            <div id="content">
+
+                {% include 'topbar.html'%}
+
+                <!-- Begin Page Content --> 
+                <div class="container-fluid">
+
+                    <!-- Page Heading -->
+                    <h1 class="h3 mb-4 text-gray-800">Buttons</h1>
+
+                    <div class="row">
+
+                        <div class="col-lg-12">
+
+                            <!-- Circle Buttons -->
+                            <div class="card shadow mb-4">
+                                <div class="card-header py-3">
+                                    <h6 class="m-0 font-weight-bold text-primary">OceanFreight</h6>
+                                </div>
+                                <div class="card-body">
+                                    
+                                    <!-- Circle Buttons (Default) -->
+                                    <div class="table-responsive">
+                                        <th>
+                                            <div>
+                                                <a href="{% url 'FCL_insert' %}" >
+                                                    <button type="button" class="btn btn-success" style= "margin-bottom: 1%;">+ADD</button>
+                                                </a>
+                                                <a href="{% url 'FCL_list' %}" >
+                                                    <button type="button" class="btn btn-success" style= "float: right; margin-left: 1%;">View all</button>
+                                                </a>
+                                                <form
+                                                class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search" style="float: right; margin-top: 10%;"
+                                                action="{% url 'search' %}" method="get">
+                                                <div class="input-group" >
+                                                    <input type="text" class="form-control bg-light border-0 small" placeholder="Sear for ... "
+                                                        aria-label="Search" aria-describedby="basic-addon2" name="q" value="{{ q }}">
+                                                    <div class="input-group-append">
+                                                        <button class="btn btn-primary" type="submit" style=margin>
+                                                            <i class="fas fa-search fa-sm"></i>
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                                </form>
+                                            </div>
+                                        </th>
+
+                                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                            <thead>
+                                                <tr>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                    <th width="13%">Date</th>   
+								                    <th width="7%">Origin</th>
+                                                    <th>Dest</th>
+                                                    <th>Carrier</th>
+                                                    <th>20ft</th>
+                                                    <th>40ft</th>
+                                                    <th width="13%">Effective</th>
+                                                    <th width="13%">Scno</th>
+                                                    <th width="10%">Pic</th>
+								                    <th>&nbsp;</th>
+                                                    <th>&nbsp;</th>                                
+                                                    
+
+                                                </tr>
+                                            </thead>
+                                            <tfoot>
+                                                <tr>
+                                                    <th width="13%">Date</th>   
+								                    <th width="7%">Origin</th>
+                                                    <th>Dest</th>
+                                                    <th>Carrier</th>
+                                                    <th>20ft</th>
+                                                    <th>40ft</th>
+                                                    <th width="13%">Effective</th>
+                                                    <th width="13%">Scno</th>
+                                                    <th width="10%">Pic</th>
+								                    <th>&nbsp;</th>
+                                                    <th>&nbsp;</th>                                
+                                                    
+                                                </tr>
+                                            </tfoot>
+                                            <tbody>
+                                              <tr>    
+                                                {% for employee in employee_list %}
+                                                <td>{{employee.chk_date}}</td>
+                                                <td style="text-transform :uppercase">{{employee.origin}}</td>
+                                                <td style="text-transform :uppercase">{{employee.dest}}</td>
+                                                <td style="text-transform :uppercase">{{employee.carrier}}</td>
+                                                <td>{{employee.twenty}}</td>
+                                                <td>{{employee.fourty}}</td>
+                                                <td>{{employee.effective}}</td>
+                                                <td style="text-transform :uppercase">{{employee.scno}}</td>
+                                                <td style="text-transform :capitalize">{{employee.position}}</td>
+                                                <td>
+                                                    <a href="{% url 'FCL_update' employee.id %}">
+                                                        <button type="button" class="btn btn-warning btn-circle btn-sm " id = "update" >
+                                                            <i class="fas fa-pen"></i>
+                                                            </button></a>
+                                                    </td>
+                                                    
+                                                    <td>
+                                                    <form action="{% url 'FCL_delete' employee.id %}" method="post" class="d-inline">
+                                                        {% csrf_token %}
+                                                        <button type="submit" class="btn btn-danger btn-circle btn-sm"  id = "delete" >
+                                                            <i class="fas fa-trash"></i>
+                                                        </button></form>
+                                                    </td>
+                                              </tr>
+                                                {% endfor %}   
+                                            </tbody>
+
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>                           
+
+                        </div>
+
+                    
+                    </div>
+
+                </div>
+                <!-- /.container-fluid -->
+
+            </div>
+            <!-- End of Main Content -->
+
+            {% include 'footer.html'%}
+
+        </div>
+        <!-- End of Content Wrapper -->
+
+    </div>
+    <!-- End of Page Wrapper -->
+
+    {%include 'modal.html'%}
+
+    <!-- Bootstrap core JavaScript-->
+    <script src="/static/vendor/jquery/jquery.min.js"></script>
+    <script src="/static/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Core plugin JavaScript-->
+    <script src="/static/vendor/jquery-easing/jquery.easing.min.js"></script>
+
+    <!-- Custom scripts for all pages-->
+    <script src="/static/js/sb-admin-2.min.js"></script>
+
+</body>
+
+</html>

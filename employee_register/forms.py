@@ -1,41 +1,27 @@
 from django import forms
-from .models import LCL, Employee
-from .models import Airfreight
-
+from .models import *
+from crispy_forms.helper import FormHelper
 
 
 class EmployeeForm(forms.ModelForm) :
     
     class Meta:
         model = Employee
-        fields = ('chk_date','pic_code','origin','dest','carrier','twenty','fourty','freq','ttime','effective','scno','remark','position')
-        labels = {
-            'chk_date' : 'Check date',
-            'pic_code' : 'PIC',
-            'origin' : 'Origin',
-            'dest' : 'Destination',
-            'carrier' : 'Carrier',
-            'twenty' : '20FT',
-            'fourty' : '40FT',
-            'freq' : 'Frequency',
-            'ttime' : 'T/T',
-            'effective' : '운임유효기간',
-            'scno' : 'SC No.',
-            'remark' : 'Remark',
-            'position' : '담당자'
-        }
+        fields = ('chk_date','origin','dest','carrier','twenty','fourty','freq','ttime','effective','scno','remark',)
+        exclude = ['username']
         widgets = {
-        'chk_date': forms.DateInput(format=('%m/%d/%Y'), attrs={'class':'form-control', 'placeholder':'Select a date', 'type':'date'}),
-        'effective': forms.DateInput(format=('%m/%d/%Y'), attrs={'class':'form-control', 'placeholder':'Select a date', 'type':'date'}),
-        }
+        'chk_date': forms.DateInput(format=('%m/%d/%Y'), attrs={'placeholder':'Select a date', 'type':'date'}),
+        'effective': forms.DateInput(format=('%m/%d/%Y'), attrs={'placeholder':'Select a date', 'type':'date'}),
         
+        }
+
+
         
         
     def __init__(self, *args, **kwargs):
         super(EmployeeForm,self).__init__(*args, **kwargs)
-        # self.fields['position'].empty_label = "Select"
+
         self.fields['chk_date'].required = False  #필수 입력값 아님
-        self.fields['pic_code'].required = False
         self.fields['origin'].required = False
         self.fields['dest'].required = False
         self.fields['carrier'].required = False
@@ -46,26 +32,28 @@ class EmployeeForm(forms.ModelForm) :
         self.fields['effective'].required = False
         self.fields['scno'].required = False
         self.fields['remark'].required = False
-        self.fields['position'].required = False
+        self.helper = FormHelper()
+        self.helper.form_show_labels = False 
         
 class AirfreightForm(forms.ModelForm) :
     
     class Meta:
         model = Airfreight
         fields = '__all__'
+        exclude = ['username']
         # labels = {
         # }
         widgets = {
-        'air_chk_date': forms.DateInput(format=('%m/%d/%Y'), attrs={'class':'form-control', 'placeholder':'Select a date', 'type':'date'}),
-        }
+        'air_chk_date': forms.DateInput(format=('%m/%d/%Y'), attrs={'placeholder':'Select a date', 'type':'date'}),
+        'air_effective': forms.DateInput(format=('%m/%d/%Y'), attrs={'placeholder':'Select a date', 'type':'date'}),
         
+        }
         
         
     def __init__(self, *args, **kwargs):
         super(AirfreightForm,self).__init__(*args, **kwargs)
-        # self.fields['position'].empty_label = "Select"
+
         self.fields['air_consol'].required = False  #필수 입력값 아님
-        self.fields['air_pic'].required = False
         self.fields['air_chk_date'].required = False
         self.fields['air_origin'].required = False
         self.fields['air_dest'].required = False
@@ -82,32 +70,88 @@ class AirfreightForm(forms.ModelForm) :
         self.fields['air_tspoint'].required = False
         self.fields['air_skdl'].required = False
         self.fields['air_remark'].required = False
+        self.fields['air_effective'].required = False
+        self.helper = FormHelper()
+        self.helper.form_show_labels = False 
         
         
 class LCLForm(forms.ModelForm) :
     
     class Meta:
         model = LCL
-        fields = '__all__'
+        fields = ('LCL_chk_date','LCL_origin','LCL_dest','LCL_ofc','LCL_consol','LCL_ttime','LCL_effective','LCL_remark','LCL_ofcunit')
+        exclude = ['username']
+
         # labels = {
             
         # }
         widgets = {
-        'LCL_chk_date': forms.DateInput(format=('%m/%d/%Y'), attrs={'class':'form-control', 'placeholder':'Select a date', 'type':'date'}),
-        'LCL_effective': forms.DateInput(format=('%m/%d/%Y'), attrs={'class':'form-control', 'placeholder':'Select a date', 'type':'date'}),
+        'LCL_chk_date': forms.DateInput(format=('%m/%d/%Y'), attrs={'placeholder':'Select a date', 'type':'date'}),
+        'LCL_effective': forms.DateInput(format=('%m/%d/%Y'), attrs={'placeholder':'Select a date', 'type':'date'}),
+        
         }
         
         
         
     def __init__(self, *args, **kwargs):
         super(LCLForm,self).__init__(*args, **kwargs)
-        # self.fields['position'].empty_label = "Select"
+
         self.fields['LCL_chk_date'].required = False  #필수 입력값 아님
-        self.fields['LCL_pic_code'].required = False
         self.fields['LCL_origin'].required = False
         self.fields['LCL_dest'].required = False
         self.fields['LCL_ofc'].required = False
         self.fields['LCL_consol'].required = False
-        self.fields['LCL_ttime'].required = False        
+        self.fields['LCL_ttime'].required = False
         self.fields['LCL_effective'].required = False
         self.fields['LCL_remark'].required = False
+        self.helper = FormHelper()
+        self.helper.form_show_labels = False 
+        
+        
+class Local_AirForm(forms.ModelForm):
+    class Meta:
+        model = Local_Air
+        fields = '__all__'
+        exclude = ['username']
+        
+    def __init__(self, *args, **kwargs):
+        super(Local_AirForm,self).__init__(*args, **kwargs)
+
+        self.fields['Loc_Air_Hdc'].required = False 
+        self.fields['Loc_Air_Hdcunit'].required = False
+        self.fields['Loc_Air_Clc'].required = False 
+        self.fields['Loc_Air_Clcunit'].required = False
+        self.fields['Loc_Air_Doc'].required = False 
+        self.fields['Loc_Air_Docunit'].required = False
+        self.fields['Loc_Air_Thc'].required = False 
+        self.fields['Loc_Air_Thcunit'].required = False
+        self.fields['Loc_Air_Otc'].required = False
+        self.fields['Loc_Air_Remark'].required = False
+        
+        self.helper = FormHelper()
+        self.helper.form_show_labels = False     
+        
+class Local_LclForm(forms.ModelForm):
+    class Meta:
+        model = Local_Lcl
+        fields = '__all__'
+        exclude = ['username']
+        
+    def __init__(self, *args, **kwargs):
+        super(Local_LclForm,self).__init__(*args, **kwargs)
+        
+        self.fields['Loc_Lcl_Cfs'].required = False 
+        self.fields['Loc_Lcl_Cfsunit'].required = False
+        self.fields['Loc_Lcl_Doc'].required = False 
+        self.fields['Loc_Lcl_Docunit'].required = False
+        self.fields['Loc_Lcl_Hdc'].required = False 
+        self.fields['Loc_Lcl_Hdcunit'].required = False
+        self.fields['Loc_Lcl_Clc'].required = False 
+        self.fields['Loc_Lcl_Clcunit'].required = False
+        self.fields['Loc_Lcl_Blf'].required = False 
+        self.fields['Loc_Lcl_Blfunit'].required = False
+        self.fields['Loc_Lcl_Otc'].required = False
+        self.fields['Loc_Lcl_Remark'].required = False
+        
+        self.helper = FormHelper()
+        self.helper.form_show_labels = False     

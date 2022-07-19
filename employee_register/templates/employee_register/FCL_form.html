@@ -37,43 +37,74 @@
                         width="100%"
                         cellspacing="0"
                       >
-                        <thead>
-
+                        <thead style="width: 100%">
+                          <tr style="width: 100px">
+                            <th style="text-align: center; width: 3%">Date</th>
+                            <th style="text-align: center; width: 3%">
+                              Effective
+                            </th>
+                            <th style="text-align: center; width: 12.5%">
+                              Carrier
+                            </th>
+                            <th style="text-align: center; width: 10%">
+                              Origin
+                            </th>
+                            <th style="text-align: center; width: 10%">
+                              Destination
+                            </th>
+                            <th style="text-align: center; width: 12.5% ; color: red;">
+                              20ft
+                            </th>
+                            <th style="text-align: center; width: 12.5% ; color: red;">
+                              40ft
+                            </th>
+                            <th style="text-align: center; width: 12.5%">
+                              frequency
+                            </th>
+                            <th style="text-align: center; width: 5%">
+                              T/time
+                            </th>
+                            
+                            <th style="text-align: center; width: 12.5%">
+                              Sc No.
+                            </th>
+                          </tr>
                         </thead>
                         <tfoot></tfoot>
                         <tbody>
                           <form action="" method="post" autocomplete="off">
                             {% csrf_token %}
-
-                            <div>{{form.chk_date|as_crispy_field}}</div>
-                            <div>{{form.carrier|as_crispy_field}}</div>
-                            <div>{{form.origin|as_crispy_field}}</div>
-                            <div>{{form.dest|as_crispy_field}}</div>
-                            <div>{{form.twenty|as_crispy_field}}</div>
-                            <div>{{form.fourty|as_crispy_field}}</div>
-                            <div>{{form.freq|as_crispy_field}}</div>
-                            <div>{{form.ttime|as_crispy_field}}</div>
-                            <div>{{form.effective|as_crispy_field}}</div>
-                            <div>{{form.scno|as_crispy_field}}</div>
-                            <div>{{form.position|as_crispy_field}}</div>
-                            <div>{{form.remark|as_crispy_field}}</div>
                             <tr>
-                              <button
-                                type="submit"
-                                class="btn btn-success btn-block btn-lg"
-                              >
-                                <i class="fas fa-database"></i> Submit
-                              </button>
-                              <a
-                                href="{% url 'FCL_list' %}"
-                                class="btn btn-secondary btn-block btn-lg"
-                              >
-                                <i class="fas fa-stream"></i> Back to list
-                              </a>
+                              <td>{{form.chk_date|as_crispy_field}}</td>
+                              <td>{{form.effective|as_crispy_field}}</td>
+                              <td>{{form.carrier|as_crispy_field}}</td>
+                              <td>{{form.origin|as_crispy_field}}</td>
+                              <td>{{form.dest|as_crispy_field}}</td>
+                              <td style="color: red;">{{form.twenty|as_crispy_field}}</td>
+                              <td style="color: red;">{{form.fourty|as_crispy_field}}</td>
+                              <td>{{form.freq|as_crispy_field}}</td>
+                              <td>{{form.ttime|as_crispy_field}}</td>
+                              
+                              <td>{{form.scno|as_crispy_field}}</td>
                             </tr>
-                          </form>
+                          
                         </tbody>
                       </table>
+                      <div><br><strong style="color: red;">Remark: </strong><br><br>{{form.remark|as_crispy_field}}</div>
+                      <button
+                        type="submit"
+                        class="btn btn-success btn-block btn-lg"
+                      >
+                        <i class="fas fa-database"></i> Submit
+                      </button>
+                      
+                      <a
+                        href="{% url 'FCL_list' %}"
+                        class="btn btn-secondary btn-block btn-lg"
+                      >
+                        <i class="fas fa-stream"></i> Back to list
+                      </a>
+                    </form>
                     </div>
                   </div>
                 </div>

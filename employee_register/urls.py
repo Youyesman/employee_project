@@ -18,24 +18,32 @@ urlpatterns = [
     path('AIR/delete/<int:id>/',views.AIR_delete,name='AIR_delete'),
     path('AIR_list.html/',views.AIR_list,name='AIR_list'),
     path('404.html', views.error, name='error'),
-    path('blank.html', views.blank, name='blank'),
-    path('buttons.html', views.buttons, name='buttons'),
-    path('cards.html', views.cards, name='cards'),
-    path('charts.html', views.charts, name='charts'),
     path('forgot-password.html', views.forgotpassword, name='forgotpassword'),
     path('index.html', views.index, name='index'),
     path('register.html', views.register, name='register'),
-    path('table.html', views.table, name='table'),
-    path('utilities-animation.html', views.utilitiesanimation, name='utilitiesanimation'),
-    path('utilities-border.html', views.utilitiesborder, name='utilitieborder'),
-    path('utilities-color.html', views.utilitiescolor, name='utilitiescolor'),
-    path('utilities-other.html', views.utilitiesother, name='utilitiesother'),
     path('search/',views.search, name="search"),
     path('searchair/',views.searchair, name="searchair"),
     path('searchlcl/',views.searchlcl, name="searchlcl"),
+
+    path('Local_AIR/', views.Local_AIR_form, name='Local_AIR_insert'),
+    path('Local_AIR/<int:id>/', views.Local_AIR_form,name='Local_AIR_update'), # get and post req. for update operation
+    path('Local_AIR/delete/<int:id>/',views.Local_AIR_delete,name='Local_AIR_delete'),
+    path('Local_AIR_list.html/',views.Local_Air_list,name='Local_AIR_list'),
     
+    path('Local_LCL/', views.Local_LCL_form, name='Local_LCL_insert'),
+    path('Local_LCL/<int:id>/', views.Local_LCL_form,name='Local_LCL_update'), # get and post req. for update operation
+    path('Local_LCL/delete/<int:id>/',views.Local_LCL_delete,name='Local_LCL_delete'),
+    path('Local_LCL_list.html/',views.Local_LCL_list,name='Local_LCL_list'),
     
+    # path('Local_FCL/', views.Local_FCL_form, name='Local_FCL_insert'),
+    # path('Local_FCL/<int:id>/', views.Local_FCL_form,name='Local_FCL_update'), # get and post req. for update operation
+    # path('Local_FCL/delete/<int:id>/',views.Local_FCL_delete,name='Local_FCL_delete'),
+    # path('Local_FCL_list.html/',views.Local_FCL_list,name='Local_FCL_list'),
     
+    # path('Local_FERRY/', views.Local_FERRY_form, name='Local_FERRY_insert'),
+    # path('Local_FERRY/<int:id>/', views.Local_FERRY_form,name='Local_FERRY_update'), # get and post req. for update operation
+    # path('Local_FERRY/delete/<int:id>/',views.Local_FERRY_delete,name='Local_FERRY_delete'),
+    # path('Local_FERRY_list.html/',views.Local_FERRYr_list,name='Local_FERRY_list'),
     
     
     

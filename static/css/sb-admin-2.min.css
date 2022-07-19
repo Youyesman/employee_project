@@ -10,6 +10,7 @@
  */
 
 
+
 :root {
   --blue: #4e73df;
   --indigo: #6610f2;
@@ -503,7 +504,6 @@ pre code {
   margin-right: auto;
   margin-left: auto;
 }
-
 
 
 @media (min-width: 576px) {
@@ -4320,6 +4320,8 @@ input[type="submit"].btn-block {
 .card-deck .card {
   margin-bottom: 0.75rem;
 }
+
+
 @media (min-width: 576px) {
   .card-deck {
     display: flex;
@@ -10329,4 +10331,11 @@ footer.sticky-footer .copyright {
 }
 body.sidebar-toggled footer.sticky-footer {
   width: 100%;
+}
+
+
+.lclform{
+
+  width: 5px;
+  color: red
 }
